@@ -19,12 +19,26 @@
     "food": true,
     "vip": false,
     "pickup": {
-      "lat": 41.4965463,
-      "lon": 2.2963997
+      "lat": 41.4965467,
+      "lon": 2.2963998
     },
     "delivery": {
-      "lat": 41.507834,
-      "lon": 2.2675979
+      "lat": 41.507835,
+      "lon": 2.2675980
+    }
+  },
+    {
+    "id": "order-3",
+    "description": "I want a cake",
+    "food": true,
+    "vip": true,
+     "pickup": {
+      "lat": 41.3965463,
+      "lon": 2.1963997
+    },
+    "delivery": {
+      "lat": 41.407834,
+      "lon": 2.1675979
     }
   }
 ]

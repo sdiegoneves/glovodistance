@@ -33,21 +33,18 @@ public class APITest {
 	@DisplayName("Test BICYCLE block plus 5Km")
 	void blockDistanceTest() {
 		List<OrderVM> orders = api.ordersByCourier("courier-3");
-		assertEquals(orders.size(), 1);
+		assertEquals(orders.size(), 2);
 	}
 	
+	
 	@Test
-	@DisplayName("Test the near courier")
-	void nearCourierTest() {
+	@DisplayName("Test the priority is VIP order and the near courier")
+	void vipFirstanNearCourierTest() {
 		List<OrderVM> orders = api.ordersByCourier("courier-1");
 		
-		OrderVM orderExpected = new OrderVM("order-1", "I want a pizza cut into very small slices");
+		OrderVM orderExpected = new OrderVM("order-3", "I want a cake");
 		OrderVM orderVM = orders.get(0);
 		
 		assertEquals(orderVM.getId(), orderExpected.getId());
-	}
-	
-	
-	
-	
+	}			
 }

@@ -94,27 +94,23 @@ class API {
 			showOrders.add(order);
 					
 			// sorted for closest of couriers
-			Collections.sort (showOrders, new Comparator<Object>() {
-	            public int compare(Object o1, Object o2) {
-	            	Order p1 = (Order) o1;
-	            	Order p2 = (Order) o2;
-	                return p1.getDistance() < p2.getDistance() ? -1 : (p1.getDistance() > p2.getDistance() ? +1 : 0);
+			Collections.sort (showOrders, new Comparator<Order>() {
+	            public int compare(Order o1, Order o2) {
+	                return o1.getDistance() < o2.getDistance() ? -1 : (o1.getDistance() > o2.getDistance() ? +1 : 0);
 	            }
 	        });
 		}
     	
-    	// sorted for vip o food, depend the config
-    	Collections.sort (showOrders, new Comparator<Object>() {
-    		public int compare(Object o1, Object o2) {
-	        	Order p1 = (Order) o1;
-	            Order p2 = (Order) o2;
-	            
-	            // config in backender.priority
-	            if (priorityList.get(0) == "vip" ) {
-	            	return p1.getVip() && !p2.getVip() ? -1 : (p2.getVip() && !p1.getVip() ? +1 : 0);
-	            }	            	
-	            return p1.getFood() && !p2.getFood() ? -1 : (p2.getFood() && !p1.getFood() ? +1 : 0);
+    	// sorted for vip or food, depend the config
+    	Collections.sort (showOrders, new Comparator<Order>() {
+    		public int compare(Order o1, Order o2) {
+	                   
+	            // config in backender.priority    			
+	            if (priorityList.get(0).equals("vip")) {
+	            	return o1.getVip() && !o2.getVip() ? -1 : (o2.getVip() && !o1.getVip() ? +1 : 0);
+	            }             	
 	            	
+	            return o1.getFood() && !o2.getFood() ? -1 : (o2.getFood() && !o1.getFood() ? +1 : 0);	            		            	
 	         }
 	       });
 

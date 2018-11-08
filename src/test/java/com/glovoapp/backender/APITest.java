@@ -1,27 +1,53 @@
 package com.glovoapp.backender;
 
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class APITest extends ApplicationTest {
+import java.util.List;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+
+@RunWith(JUnitPlatform.class)
+@SpringBootTest
+@ExtendWith(SpringExtension.class)
+public class APITest {
 	
-	private MockMvc mockMvc;
+	@Autowired API api;
 	
-	@Autowired
-	private API api;
+	@Test
+	@DisplayName("Test Glovo Box required")
+	void blockWordBoxTest() {
+		List<OrderVM> orders = api.ordersByCourier("courier-2");
+		assertEquals(orders.size(), 0);
+	}
 	
-	@Before
-	public void setUp() {
-		this.mockMvc = MockMvcBuilders.standaloneSetup(api).build();
+	
+	@Test
+	@DisplayName("Test BICYCLE block plus 5Km")
+	void blockDistanceTest() {
+		List<OrderVM> orders = api.ordersByCourier("courier-3");
+		assertEquals(orders.size(), 1);
 	}
 	
 	@Test
-	void testOrdersByCourier() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/orders/courier-7e1552836a04")).andExpect(MockMvcResultMatchers.status().isOk());
+	@DisplayName("Test the near courier")
+	void nearCourierTest() {
+		List<OrderVM> orders = api.ordersByCourier("courier-1");
+		
+		OrderVM orderExpected = new OrderVM("order-1", "I want a pizza cut into very small slices");
+		OrderVM orderVM = orders.get(0);
+		
+		assertEquals(orderVM.getId(), orderExpected.getId());
 	}
+	
+	
+	
+	
 }

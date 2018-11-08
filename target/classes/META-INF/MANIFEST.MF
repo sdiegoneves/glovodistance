@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: diegoneves
+Build-Jdk: 10.0.2
+Implementation-Title: backender
+Implementation-Version: 1.0-SNAPSHOT
+Implementation-Vendor-Id: com.glovoapp
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/backender
+Created-By: Maven Integration for Eclipse
+
